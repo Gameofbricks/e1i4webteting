@@ -9,17 +9,32 @@
 
                 const formData = new FormData(this);
 
+                // 디버깅: 전송 데이터 확인
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+
                 fetch("/submit-data", {
                     method: "POST",
                     body: formData,
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     const feedback = document.getElementById("feedback");
-                    feedback.innerText = data.message || "Error: " + data.error;
+                    if (data.message) {
+                        feedback.innerText = data.message;
+                    } else {
+                        feedback.innerText = "Unexpected response from server.";
+                    }
                 })
-                .catch(() => {
-                    alert("An unexpected error occurred.");
+                .catch(error => {
+                    alert(`An unexpected error occurred: ${error.message}`);
+                    console.error("Error details:", error);
                 });
             });
         });
@@ -27,7 +42,7 @@
 </head>
 <body>
     <h1>사용자 및 반려동물 정보 입력</h1>
-    <form id="dataForm" method="POST" action="/submit-data">
+    <form id="dataForm" method="POST">
         <h2>사용자 정보</h2>
         <label for="name">이름:</label>
         <input type="text" id="name" name="name" required><br><br>
