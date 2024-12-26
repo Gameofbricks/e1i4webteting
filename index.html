@@ -52,8 +52,10 @@
         <label for="pet_breed">반려동물 종:</label>
         <input type="text" id="pet_breed" name="pet_breed" required><br><br>
 
-        <button type="submit">제출</button>
-    </form>
+
+        <form id="dataForm" method="POST" action="/submit-data">
+            <button type="submit">제출</button>
+        </form>
     <p id="feedback"></p>
 </body>
 </html>
