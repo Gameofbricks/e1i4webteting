@@ -3,29 +3,31 @@
 <head>
     <title>데이터 입력</title>
     <script>
-        document.getElementById("dataForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("dataForm").addEventListener("submit", function (event) {
+                event.preventDefault(); // 기본 제출 동작 방지
 
-            const formData = new FormData(this);
+                const formData = new FormData(this);
 
-            fetch("/submit", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                const feedback = document.getElementById("feedback");
-                feedback.innerText = data.message || "Error: " + data.error;
-            })
-            .catch(() => {
-                alert("An unexpected error occurred.");
+                fetch("/submit-data", {
+                    method: "POST",
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const feedback = document.getElementById("feedback");
+                    feedback.innerText = data.message || "Error: " + data.error;
+                })
+                .catch(() => {
+                    alert("An unexpected error occurred.");
+                });
             });
         });
     </script>
 </head>
 <body>
     <h1>사용자 및 반려동물 정보 입력</h1>
-    <form id="dataForm" method="POST" action="/submit">
+    <form id="dataForm" method="POST" action="/submit-data">
         <h2>사용자 정보</h2>
         <label for="name">이름:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -52,10 +54,8 @@
         <label for="pet_breed">반려동물 종:</label>
         <input type="text" id="pet_breed" name="pet_breed" required><br><br>
 
-
-        <form id="dataForm" method="POST" action="/submit-data">
-            <button type="submit">제출</button>
-        </form>
+        <button type="submit">제출</button>
+    </form>
     <p id="feedback"></p>
 </body>
 </html>
