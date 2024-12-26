@@ -14,7 +14,8 @@
                     console.log(`${key}: ${value}`);
                 }
 
-                fetch("/submit-data", {
+                // Flask 서버의 URL로 POST 요청 보내기
+                fetch("http://127.0.0.1:5000/submit-data", { // Flask 서버 URL
                     method: "POST",
                     body: formData,
                 })
@@ -76,9 +77,6 @@
 
         <button type="submit">제출</button>
     </form>
-    <p id="feedback"></p>
-</body>
-</html>
     <p id="feedback"></p>
 </body>
 </html>
