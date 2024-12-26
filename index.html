@@ -28,13 +28,18 @@
                     const feedback = document.getElementById("feedback");
                     if (data.message) {
                         feedback.innerText = data.message;
+                        feedback.style.color = "green"; // 성공 메시지 색상
                     } else {
                         feedback.innerText = "Unexpected response from server.";
+                        feedback.style.color = "red"; // 오류 메시지 색상
                     }
                 })
                 .catch(error => {
                     alert(`An unexpected error occurred: ${error.message}`);
                     console.error("Error details:", error);
+                    const feedback = document.getElementById("feedback");
+                    feedback.innerText = "An error occurred while submitting the form.";
+                    feedback.style.color = "red"; // 오류 메시지 색상
                 });
             });
         });
@@ -71,6 +76,9 @@
 
         <button type="submit">제출</button>
     </form>
+    <p id="feedback"></p>
+</body>
+</html>
     <p id="feedback"></p>
 </body>
 </html>
