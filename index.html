@@ -1,82 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>데이터 입력</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("dataForm").addEventListener("submit", function (event) {
-                event.preventDefault(); // 기본 제출 동작 방지
-
-                const formData = new FormData(this);
-
-                // 디버깅: 전송 데이터 확인
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-
-                // Flask 서버의 URL로 POST 요청 보내기
-                fetch("122.36.161.96:12000/submit-data", { // Flask 서버 URL
-                    method: "POST",
-                    body: formData,
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const feedback = document.getElementById("feedback");
-                    if (data.message) {
-                        feedback.innerText = data.message;
-                        feedback.style.color = "green"; // 성공 메시지 색상
-                    } else {
-                        feedback.innerText = "Unexpected response from server.";
-                        feedback.style.color = "red"; // 오류 메시지 색상
-                    }
-                })
-                .catch(error => {
-                    alert(`An unexpected error occurred: ${error.message}`);
-                    console.error("Error details:", error);
-                    const feedback = document.getElementById("feedback");
-                    feedback.innerText = "An error occurred while submitting the form.";
-                    feedback.style.color = "red"; // 오류 메시지 색상
-                });
-            });
-        });
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner and Pet Information</title>
 </head>
 <body>
-    <h1>사용자 및 반려동물 정보 입력</h1>
-    <form id="dataForm" method="POST">
-        <h2>사용자 정보</h2>
-        <label for="name">이름:</label>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="age">나이:</label>
-        <input type="number" id="age" name="age" min="0" required><br><br>
-
-        <label for="address">주소:</label>
-        <input type="text" id="address" name="address" required><br><br>
-
-        <label for="email">이메일:</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <h2>반려동물 정보</h2>
-        <label for="pet_name">반려동물 이름:</label>
-        <input type="text" id="pet_name" name="pet_name" required><br><br>
-
-        <label for="pet_age">반려동물 나이:</label>
-        <input type="number" id="pet_age" name="pet_age" min="0" required><br><br>
-
-        <label for="pet_birthday">반려동물 생일:</label>
-        <input type="date" id="pet_birthday" name="pet_birthday" required><br><br>
-
-        <label for="pet_breed">반려동물 종:</label>
-        <input type="text" id="pet_breed" name="pet_breed" required><br><br>
-
-        <button type="submit">제출</button>
+    <h1>Owner and Pet Information</h1>
+    <form action="/submit" method="POST">
+        <h2>Owner Information</h2>
+        <label for="owner_name">Name:</label>
+        <input type="text" id="owner_name" name="owner_name" required><br>
+        <label for="owner_age">Age:</label>
+        <input type="number" id="owner_age" name="owner_age" required><br>
+        <label for="owner_email">Email:</label>
+        <input type="email" id="owner_email" name="owner_email" required><br>
+        <label for="owner_address">Address:</label>
+        <input type="text" id="owner_address" name="owner_address" required><br>
+        
+        <h2>Pet Information</h2>
+        <label for="pet_name">Name:</label>
+        <input type="text" id="pet_name" name="pet_name" required><br>
+        <label for="pet_age">Age:</label>
+        <input type="number" id="pet_age" name="pet_age" required><br>
+        <label for="pet_birthday">Birthday:</label>
+        <input type="date" id="pet_birthday" name="pet_birthday" required><br>
+        <label for="pet_species">Species:</label>
+        <input type="text" id="pet_species" name="pet_species" required><br>
+        <label for="pet_chip_code">Chip Code:</label>
+        <input type="text" id="pet_chip_code" name="pet_chip_code" required><br>
+        
+        <button type="submit">Submit</button>
     </form>
-    <p id="feedback"></p>
 </body>
 </html>
