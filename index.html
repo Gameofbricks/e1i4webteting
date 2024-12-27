@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner and Pet Information</title>
+    <title>주인 및 반려동물 정보</title>
 </head>
 <body>
-    <h1>Owner and Pet Information</h1>
-    <form action="/submit" method="POST">
-        <h2>Owner Information</h2>
-        <label for="owner_name">Name:</label>
+    <h1>주인 및 반려동물 정보 입력</h1>
+    <form action="https://your-server-address/submit" method="POST">
+        <h2>주인 정보</h2>
+        <label for="owner_name">이름:</label>
         <input type="text" id="owner_name" name="owner_name" required><br>
-        <label for="owner_age">Age:</label>
+        
+        <label for="owner_age">나이:</label>
         <input type="number" id="owner_age" name="owner_age" required><br>
-        <label for="owner_email">Email:</label>
+        
+        <label for="owner_email">이메일:</label>
         <input type="email" id="owner_email" name="owner_email" required><br>
-        <label for="owner_address">Address:</label>
+        
+        <label for="owner_address">주소:</label>
         <input type="text" id="owner_address" name="owner_address" required><br>
         
-        <h2>Pet Information</h2>
-        <label for="pet_name">Name:</label>
+        <h2>반려동물 정보</h2>
+        <label for="pet_name">이름:</label>
         <input type="text" id="pet_name" name="pet_name" required><br>
-        <label for="pet_age">Age:</label>
+        
+        <label for="pet_age">나이:</label>
         <input type="number" id="pet_age" name="pet_age" required><br>
-        <label for="pet_birthday">Birthday:</label>
+        
+        <label for="pet_birthday">생일:</label>
         <input type="date" id="pet_birthday" name="pet_birthday" required><br>
-        <label for="pet_species">Species:</label>
+        
+        <label for="pet_species">종:</label>
         <input type="text" id="pet_species" name="pet_species" required><br>
-        <label for="pet_chip_code">Chip Code:</label>
+        
+        <label for="pet_chip_code">생체 칩 코드:</label>
         <input type="text" id="pet_chip_code" name="pet_chip_code" required><br>
         
-        <button type="submit">Submit</button>
+        <button type="submit">제출</button>
     </form>
 </body>
 </html>
